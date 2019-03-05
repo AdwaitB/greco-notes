@@ -139,30 +139,3 @@ The storage controller has to also keep looking for inconsistencies that occur a
 2. Pipeline : A chain of tasks where the output of the task are inputs for the next task in chain.
 3. Bag : A group of similar tasks with no data dependencies between each other.
 4. Graph : The most general way to define dependencies between tasks. All the above tasks are a specific version of this.
-
-
-## Some solution ideas
-
-- [ ] `Estimating data transfer costs, using edge caches` : Considering two main factors, the bandwidth and the latency. The bandwidth can be mapped with network flow and the latency with dijkstra. But we have to extend this to consider multi source, multi destination and merging both of these factors. This algorithm should scale well and needs to be fast. The final value should be scaled from this optimal value by a constant factor that can be learnt by ML or even regression (which is possible in realtime).
-- [ ] `Speculation` : Given that cache data is used for local transport, we can find clusters for finding points such that the data is always present in some nearby cache. k-means clustering?
-- [ ] `Synchronization` : The knowledge base needs to be up-to-date for being effective. Since the data operations are executed through the storage controller, the map can be updated before the action is executed. A periodic heartbeat message will make sure that local changes and monitors keep the knowledge updated.
-- [ ] `Architecture` : Having multi-tier QBoxes. Currently QBoxes are the only link between the edge and the cloud. So in places where there are multiple QBoxes for a large site. We can have a 'parent QBox' that controls these Qboxes. This makes sure that local QBoxes are organized by one QBox that represents the location. Now even if P2P networking is not an options, data synchronization is still possible as now the QBoxes that are directly connected to the DC are significantly reduced. A local copy can still be distributed across the child QBoxes. The only time the data will pass through DC is when it has to travel a long geographical location. In such a case, data can be directly fetched from CEPH. Hence overall, it still significantly reduces the bandwidth withouth having P2P transfers.
-- [ ] `Checkpointing` : Checkpointing for long duration tasks. Although, it is not necessary now, in case of highly distributed systems, and very high number of tasks, node availability is not guranteed.
-- [ ] `Speculation` : Identifying clogged points will give a rough idea that nothing is going to be scheduled on these nodes any time soon. So if clog points are detected with high accuracy, we can speculate high output data generation from those points and so cache the new data somewhere else.
-
-## Questions 
-
-- [ ] Why is the task model mapped like this?
-  1. Data and compute are different. Mapping exists. OK.
-  2. A predefined set of instances? Why do we need scheduling then?
-  3. Parent node?
-  4. What about data that is transient.
-  5. What about data that is locked?
-  6. How to estimate wall time?
-- [ ] What is Distributed IaaS?
-  1.  Does this mean that the distribution is on the user?
-  2.  How is the interface? SSH to each shell would not be feasible.
-- [ ] General cloud processing vs Cloud-Service?
-- [ ] Why are IOT related tasks going through the learning process? 
-  1. Will not be able to use in real-time as it talks with InfluxDB?
-  2. Location of this influx DB.
