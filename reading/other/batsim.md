@@ -6,7 +6,7 @@ It then gives out three files which show the execution schedule, the scheduling 
 
 The components are instantiated as processes (OS System processes) and communicate via a Unix Domain Socket synchronously. The simulation runs is Batsim component and as soon as an event occurs, it is stopped and the Decision component takes further decision.
 
-### SimGrid model
+## SimGrid model
 
 1. Host : A resource that is defined in flops.
 2. Links : A link in a network or between  networks. Defined in latency and bandwidth. The network topolgy has to be specified.
@@ -21,7 +21,7 @@ The hosts and links are defined by an XML file and the processes and messages th
 
 > In the case of Simulating MPI, the communication is handled by the simulator while considering the latencies as provided in the configuration file. The user needs to write MPI statements too.
 
-### Batsim model
+## Batsim model
 
 Batsim consists of a `Master host`
 
@@ -42,6 +42,13 @@ Types of profiles
 
 External Events : External events that occur can be added to the simulation.
 
+### Batsim Protocol
+
+It is the protocol that is used to communicate between Batsim and the decision. These components communicate via this protocol to tell about scheduling, job failures, external factors etc. These are basically json objects that have a specific type as defined in the documentation. These types tell the receiver what to do or what the status of the system is.
+
+### Writing your own scheduler
+
+The Batsim backend that is written on top of Simgrid need not be modified in case we want to write a custom scheduler. The Decisiom module is the scheduler that needs to be written seperately (and also run seperately). As these components talk with each other through message passing, this module can be written is a variety of ways, but should support the same syntax and message passing protocol. Pybatsim is a python based scheduler (or Decision module) that works with batsim.
 
 ### Other Points
 
