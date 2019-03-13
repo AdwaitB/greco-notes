@@ -10,17 +10,23 @@ Place to add ideas.
 2. `Estimating data transfer costs, using edge caches`
    1. Considering two main factors, the bandwidth and the latency. The bandwidth can be mapped with network flow and the latency with dijkstra. Latency will be small compared to delay caused due to bandwidth.
    2. Extend this to consider multi source, multi destination and merging both of these factors. This algorithm should scale well and needs to be fast. The final value should be scaled by a constant factor that can be learnt by ML or even regression (which is possible in realtime).
+   3. Gomory-Hu trees as an intermediate data structure for linear time queries for max flow. Although in such a case, exact flow cannot be found out.
 3. `Speculation`
    1. Given that cache data is used for local transport, we can find clusters while initializing the data such that the worst case cost for travel (if requested anywhere from the network) is minimized. k-means clustering to find clusters.
    2. Help the scheduler by identifying nodes where data is seldom localized. This gives an idea for unused local instances where background tasks dominate. Data can be localized here while initializing or during data transfer request.
    3. Also identify points where data is clogging the bandwidth. Move data away from these points.
-4. `Synchronization`
+4. `Transient`
+   1. A common interface between the scheduler and the storage controller that for every pair of {job, data}, keeps the speculation and knowledge bases from both the scheduler and the storage controller. The benefit being that existence of race conditions between scheduler and the storage controller in the case when there is no speculation. It is same as a multithreaded request and read application. Need to have an intermedicate data structure that can synchronize and prevent wierd outputs.
+   2. Job Scheduling Levels (Stored in Job transient) : Running, in queue, in queue (volatile), speculated, not speculated or scheduled.
+   3. Data Storage Levels (Stored in storage transient) : Present, Volatile, Speculated, Stale, CEPH.
+   4. If the scheduler needs more info from the storage controller of vice versa, we have a query interface for the storage controller. that lets request updates into the Transient or improved cost queries.
+5. `Synchronization`
    1. The knowledge base needs to be up-to-date for being effective. Since the data operations are executed through the storage controller, the map can be updated before the action is executed. A periodic heartbeat message will make sure that local changes and monitors keep the knowledge updated.
-5. `Scheduling` 
+6. `Scheduling` 
    1. Having multi-tier QBoxes. Currently QBoxes are the only link between the edge and the cloud. So in places where there are multiple QBoxes for a large site. We can have a 'parent QBox' that controls these Qboxes. Scheduling occurs at every level and each level is only responsible for the next level. Every level does have metrics based on its subtree.
-6. `Fog Storage`
+7. `Fog Storage`
    1. Similar to IPFS with DFS, we can have storage devices that cache data on each of the above mentioned tiers. The scheduling nodes are synchronized with the storage controller nodes. How faster this is than one single DFS for the whole Fog network to be studied.
-7. `Checkpointing` 
+8. `Checkpointing` 
    1. Checkpointing for long duration tasks. Although, it is not necessary now, in case of highly distributed systems, and very high number of tasks, node availability is not guranteed. Tasks can be specifically programmed with an interface which supports
       - Taking a checkpoint
       - Loading from a checkpoint
