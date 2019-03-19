@@ -15,19 +15,24 @@ Place to add ideas.
    1. Given that cache data is used for local transport, we can find clusters while initializing the data such that the worst case cost for travel (if requested anywhere from the network) is minimized. k-means clustering to find clusters.
    2. Help the scheduler by identifying nodes where data is seldom localized. This gives an idea for unused local instances where background tasks dominate. Data can be localized here while initializing or during data transfer request.
    3. Also identify points where data is clogging the bandwidth. Move data away from these points.
-4. `Transient`
-   1. A common interface between the scheduler and the storage controller that for every pair of {job, data}, keeps the speculation and knowledge bases from both the scheduler and the storage controller. The benefit being that existence of race conditions between scheduler and the storage controller in the case when there is no speculation. It is same as a multithreaded request and read application. Need to have an intermedicate data structure that can synchronize and prevent wierd outputs.
-   2. Job Scheduling Levels (Stored in Job transient) : Running, in queue, in queue (volatile), speculated, not speculated or scheduled.
-   3. Data Storage Levels (Stored in storage transient) : Present, Volatile, Speculated, Stale, CEPH.
-   4. If the scheduler needs more info from the storage controller of vice versa, we have a query interface for the storage controller. that lets request updates into the Transient or improved cost queries.
-5. `Synchronization`
+4. `Synchronization`
    1. The knowledge base needs to be up-to-date for being effective. Since the data operations are executed through the storage controller, the map can be updated before the action is executed. A periodic heartbeat message will make sure that local changes and monitors keep the knowledge updated.
-6. `Scheduling` 
-   1. Having multi-tier QBoxes. Currently QBoxes are the only link between the edge and the cloud. So in places where there are multiple QBoxes for a large site. We can have a 'parent QBox' that controls these Qboxes. Scheduling occurs at every level and each level is only responsible for the next level. Every level does have metrics based on its subtree.
-7. `Fog Storage`
+5. `Fog Storage`
    1. Similar to IPFS with DFS, we can have storage devices that cache data on each of the above mentioned tiers. The scheduling nodes are synchronized with the storage controller nodes. How faster this is than one single DFS for the whole Fog network to be studied.
-8. `Checkpointing` 
+6. `Checkpointing` 
    1. Checkpointing for long duration tasks. Although, it is not necessary now, in case of highly distributed systems, and very high number of tasks, node availability is not guranteed. Tasks can be specifically programmed with an interface which supports
       - Taking a checkpoint
       - Loading from a checkpoint
       - Evaluating percentage of task completion
+7. `Unified Scheduling`
+   1.  In traditional single node computers, scheduling was done on the single fact to minimize turnaround time and maximize throughput. This was crucial for better use. There was a single source of data. Hence the scheduler was different than the storage controller.
+   2.  Even in case of multiple PCI peripherals, compute, storage scheduling wasn't much of a problem due to very fast busses interconnecting each device independently.
+   3.  Now, the storage are jobs are equally important given the geo-distributed nature. One cannot simply consider these are two different entities. The scheduling of jobs to achieve user SLA and the efficient storage are equally important for fault tollerant and reducing network impact.
+   4.  So instead of thinking of the storage controller as a different unit, I define a map set which is a set of maps that has a data mapped to multiple jobs (and its reverse). Hence this map set is fundamental unit of this geo-distributed system.
+   5.  Each map has to be handled without seperating data and compute.
+8. `Multi layer scheduling`
+    1.  All models described are centralized.
+    2.  Nodes in the whole system cannot be stable. As system increases the frequency at which nodes enter/exit the system will be fast that communication about all this with the central scheduler will be very slow and hence the scheduler wont be able to communicate efficiently.
+    3.  Split the map of jobs -> data into multiple large sets and let the local schedulers handle this.
+    4.  This is scalable as multi-tier scheduling is possible. Only the bottom layer does the exact node scheduling.
+    5.  Easier message passing. The network wont be overloaded with data transfers.
