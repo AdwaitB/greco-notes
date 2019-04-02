@@ -13115,7 +13115,7 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">HTML</span>
@@ -13146,7 +13146,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[25]:</div>
+    <div class="prompt output_prompt">Out[1]:</div>
 
 
 
@@ -13457,7 +13457,7 @@ Down transfers : 11730
     
     <span class="k">return</span> <span class="p">[</span><span class="n">count_true</span><span class="p">,</span> <span class="n">count_less</span><span class="p">,</span> <span class="n">count_more</span><span class="p">],</span> <span class="n">diff_per_list</span><span class="p">,</span> <span class="n">more_than_cut</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
     <span class="n">stat</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">more_than_cut</span> <span class="o">=</span> <span class="n">check_transfer_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">8</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Entries with difference beyond 100MB : &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">more_than_cut</span><span class="p">))</span>
@@ -13474,33 +13474,6 @@ Down transfers : 11730
 <div class="output_wrapper">
 <div class="output">
 
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[4189, 2, 5564]
-Entries with difference beyond 100MB : 535
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-"
->
-</div>
-
-</div>
 
 <div class="output_area">
 
@@ -13558,38 +13531,15 @@ Entries with difference beyond 100MB : 850
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
     <span class="n">data_mts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;transfer_history.transfer_size&quot;</span><span class="p">]))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;data[&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span><span class="p">)</span>
+    <span class="c1"># print(&quot;data[&quot; + str(i) + &quot;]&quot;)</span>
     
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After removing negative and zeros : &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_mts</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
+    <span class="c1"># print(&quot;Before removing negative and zeros : &quot; + str(len(data_mts[i])))</span>
     
     <span class="n">data_mts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_mts</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">data_mts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After removing negative and zeros : &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_mts</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
+    <span class="c1"># print(&quot;After removing negative and zeros : &quot; + str(len(data_mts[i])))</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>data[0]
-After removing negative and zeros : 9755
-After removing negative and zeros : 7725
-data[1]
-After removing negative and zeros : 12206
-After removing negative and zeros : 9504
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -13603,38 +13553,15 @@ After removing negative and zeros : 9504
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
     <span class="n">data_mtts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="s2">&quot;transfer_history.time_transfer_sec&quot;</span><span class="p">]))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;data[&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span><span class="p">)</span>
+    <span class="c1"># print(&quot;data[&quot; + str(i) + &quot;]&quot;)</span>
     
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After removing negative and zeros : &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_mtts</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
+    <span class="c1"># print(&quot;After removing negative and zeros : &quot; + str(len(data_mtts[i])))</span>
     
     <span class="n">data_mtts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_mtts</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">data_mtts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After removing negative and zeros : &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_mtts</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
+    <span class="c1"># print(&quot;After removing negative and zeros : &quot; + str(len(data_mtts[i])))</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>data[0]
-After removing negative and zeros : 9755
-After removing negative and zeros : 9693
-data[1]
-After removing negative and zeros : 12206
-After removing negative and zeros : 12099
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
