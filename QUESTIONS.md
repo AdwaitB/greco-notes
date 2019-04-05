@@ -10,7 +10,4 @@ Place to add questions (and answer them :P).
    5. What about data that is locked?
    6. How to estimate wall time?
 2. Where is the location of the InfluxDB in the architecture?
-3. How is the IOT workflow processed?
-
-## InfluxDB
-
+3. How is the IOT workflow processed
