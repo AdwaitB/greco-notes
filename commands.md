@@ -30,7 +30,7 @@ python3 launcher.py schedulers/greco/qarnotNodeSched.py -o '{"dataset_filename":
     --events sample-data/2weeks_2019-03-01_2019-03-15/events.json \
     -T 2 --enable-dynamic-jobs --forward-unknown-event
 
-python3 launcher.py schedulers/greco/qarnotNodeSched.py -o '{"dataset_filename":"../batsim/build/temp/04-03_18-03/datasets.json"}'
+python3 launcher.py schedulers/greco/qarnotNodeSched.py -o '{"input_path":"../batsim/build/temp/04-03_18-03"}'
 ./batsim -p temp/04-03_18-03/platform.xml \
     -w temp/04-03_18-03/workload.json \
     --events temp/04-03_18-03/events.json \
