@@ -34,13 +34,39 @@ python3 launcher.py schedulers/greco/qarnotNodeSched.py -o '{"input_path":"../si
     --events ../../simulator-prototype/platform-generator/qarnot-extractor/sample-data/OLD/2weeks_2019-03-01_2019-03-15/events.json \
     -T 2 --enable-dynamic-jobs --forward-unknown-event
 
-python3 launcher.py schedulers/greco/qarnotNodeSched.py -o '{"input_path":"../temp/04-03_18-03", "update_period":600}'
-./batsim -p ../../temp/04-03_18-03/platform.xml \
-    -w ../../temp/04-03_18-03/workload.json \
-    --events ../../temp/04-03_18-03/events.json \
+python3 launcher.py schedulers/greco/qarnotNodeSched.py -o '{"input_path":"../transient/04-03_18-03_2m", "update_period":600}'
+./batsim -p ../../transient/04-03_18-03_2m/platform.xml \
+    -w ../../transient/04-03_18-03_2m/workload.json \
+    --events ../../transient/04-03_18-03_2m/events.json \
     -T 2 --enable-dynamic-jobs --forward-unknown-event
 ```
 ```python
 # PDB start python shell from PDB
 !import code; code.interact(local=vars())
+```
+
+```bash
+echo "Grid 5000"
+
+echo "Create a subnet"
+oarsub -I -l slash_22=1+{"virtual!='NO'"}/nodes=1
+oarsub -l host=1 -I -t deploy
+
+echo "Copy the disk file"
+cp /grid5000/virt-images/ubuntu1804-x64-min-2019041715.qcow2 /tmp/
+
+echo "Create the image file"
+qemu-img create -f qcow2 -o backing_file=/tmp/ubuntu1804-x64-min-2019041715.qcow2 /tmp/greco_simulation.qcow2
+
+echo "Pick a MAC"
+g5k-subnets -im
+
+echo "Create the VM"
+virsh create ~/XML/greco_simulation.xml
+
+echo "Get IP Address od domain"
+virsh domifaddr greco_simulator
+
+echo "kadeploy"
+kadeploy3 -f $OAR_NODE_FILE -e debian9-x64-base -k
 ```
