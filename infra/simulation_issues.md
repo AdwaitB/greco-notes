@@ -8,6 +8,8 @@ The problem with this downsampled data is that we are not only loosing informati
 Eg: for a qmobo the downsample statement has ; last(qguid), mean(motherboard_cpu_temperature), mean(memory_usage), mean(cpu_scaling_frequency)
 Here when the downsample occurs, the final entry effectively says that in the past unit time of resampling, the last qmobo had the mean temperature, memory usage, cpu_scaling_freq of the past unit time. This is making the data extrememly biased.
 
+The extractor for extracting the workload information uses last(field). Here, we loose the characteristics of the time unit. We are possibly sampling only the very generic values. 
+
 This biased information is being fed to the simulator, Even with the static scheduer, this cannot work!
 
 ### Issue with Initial State
