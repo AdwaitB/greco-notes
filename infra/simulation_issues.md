@@ -24,6 +24,8 @@ However, if for some reason the qbox stops being used by this task for a few min
 
 ?? ASK CLEMENT: Here, there are two things that the simulation cannot reflect.
 
+One more issue that can occur is that the data can be lost during the timeout_interval. In such a case, no transfer_history entry will be added and still transfer might happen. But the probability of this happening is very very small.
+
 ### Issue with Simulating Speculation
 
 The simulation assumes that the data is always present in the CEPH if required by any job. This condition is implemented as the CEPH loads all the data (that has ever come in the system) into the CEPH before the simulation starts. Speculation is when the user enters the system and then adds the data to the CEPH. This dynamic nature of CEPH is not implemented and hence cannot be simulated.
