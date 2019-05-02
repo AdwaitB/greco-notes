@@ -32,3 +32,5 @@ Speculation will be very hard to show any improvements in the current system. Th
 
 1. Batsim issue with high memory usage. 100GB of virtual memory for 2_weeks of simulation where the data is extracted from 2_months retention policy.
 2. In this case, running the simulation for more than a month will be not possible.
+3. Batsim is unable to handle UP transfers (which recently have been very high in number).
+4. Also, most of the non-zero Down transfers are due to modifications. Batsim is currently not being implemented to handle datasets at a file level as this information is not available from Qarnot's side.s
