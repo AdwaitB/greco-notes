@@ -19,7 +19,7 @@ When the simulation occurs, the qboxes are empty initially, since the number of 
 
 In the current infra, several instances are dispactched at once on a given Qbox (which I am saying as aggregation). In such a case, only one transfer will occur and be reported. As long as there is an instance, and new instances arrive a transfer will not be triggered (it is assumed that the data is present as another instance of the task is already present which has requested the data before).
 
-![Aggregation Method](Images/InstancesWorkflow.png)
+![Aggregation Method](images/InstancesWorkflow.png)
 
 However, if for some reason the qbox stops being used by this task for a few minutes (the timeout_interval), and a new instance of the task then arrives on the qbox, a new transfer is triggered because the system forgot that the task had been there before. The new transfer may or may not pull new data, depending on whether the dataset was changed by the user, which is not under our control.
 
