@@ -50,6 +50,13 @@ python3 launcher.py schedulers/greco/qarnotNodeSched.py -o '{"input_path":"../tr
     -w ../../transient/23-04_2w/workload.json \
     --events ../../transient/23-04_2w/events.json \
     -T 2 --enable-dynamic-jobs --forward-unknown-event
+
+pybatsim schedulers/greco/transferHistoryStatic.py
+python3 launcher.py schedulers/greco/transferHistoryStatic.py
+./batsim -p ../../transient/23-04_2w_static/platform.xml \
+    -w ../../transient/23-04_2w_static/workload.json \
+    --events ../../transient/23-04_2w_static/events_transfers.txt \
+    -T 2 --enable-dynamic-jobs --forward-unknown-event
 ```
 ```python
 # PDB start python shell from PDB
