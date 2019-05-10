@@ -65,7 +65,7 @@ pybatsim schedulers/greco/transferHistoryStatic.py
 python3 launcher.py schedulers/greco/transferHistoryStatic.py
 ./batsim -p ../../transient/04_10_2w_0920_0935_static/platform.xml \
     -w ../../transient/04_10_2w_0920_0935_static/workload.json \
-    -T 2 --enable-dynamic-jobs
+    -T 2
 ./batsim -p ../../transient/04_10_2w_0920_0935_static/platform.xml \
     -w ../../transient/04_10_2w_0920_0935_static/workload_empty.json \
     --events ../../transient/04_10_2w_0920_0935_static/events_transfers.txt \
