@@ -55,7 +55,20 @@ pybatsim schedulers/greco/transferHistoryStatic.py
 python3 launcher.py schedulers/greco/transferHistoryStatic.py
 ./batsim -p ../../transient/23-04_2w_static/platform.xml \
     -w ../../transient/23-04_2w_static/workload.json \
+    -T 2 --enable-dynamic-jobs
+./batsim -p ../../transient/23-04_2w_static/platform.xml \
+    -w ../../transient/23-04_2w_static/workload_empty.json \
     --events ../../transient/23-04_2w_static/events_transfers.txt \
+    -T 2 --enable-dynamic-jobs --forward-unknown-event
+
+pybatsim schedulers/greco/transferHistoryStatic.py
+python3 launcher.py schedulers/greco/transferHistoryStatic.py
+./batsim -p ../../transient/04_10_2w_0920_0935_static/platform.xml \
+    -w ../../transient/04_10_2w_0920_0935_static/workload.json \
+    -T 2 --enable-dynamic-jobs
+./batsim -p ../../transient/04_10_2w_0920_0935_static/platform.xml \
+    -w ../../transient/04_10_2w_0920_0935_static/workload_empty.json \
+    --events ../../transient/04_10_2w_0920_0935_static/events_transfers.txt \
     -T 2 --enable-dynamic-jobs --forward-unknown-event
 ```
 ```python
