@@ -9,11 +9,11 @@ echo "Pybatsim simulations"
 nix-shell https://github.com/oar-team/kapack/archive/master.tar.gz -A pybatsim
 nix-shell https://github.com/oar-team/kapack/archive/master.tar.gz -A batsim_temperature
 
-pybatsim schedulers/greco/qarnotNodeSched.py -o '{"input_path":"../simulator-prototype/platform-generator/qarnot-extractor/sample-data/OLD/simple/"}'
-python3 launcher.py schedulers/greco/qarnotNodeSched.py -o '{"input_path":"../simulator-prototype/platform-generator/qarnot-extractor/sample-data/OLD/simple/"}'
-./batsim -p ../../simulator-prototype/platform-generator/qarnot-extractor/sample-data/OLD/simple/platform_simple.xml \
-       -w ../../simulator-prototype/platform-generator/qarnot-extractor/sample-data/OLD/simple/workload_simple.json \
-       --events ../../simulator-prototype/platform-generator/qarnot-extractor/sample-data/OLD/simple/events_simple.json \
+pybatsim schedulers/greco/qarnotNodeSched.py -o '{"input_path":"../simulator-prototype/platform-generator/qarnot-extractor/sample-data/simple/"}'
+python3 launcher.py schedulers/greco/qarnotNodeSched.py -o '{"input_path":"../simulator-prototype/platform-generator/qarnot-extractor/sample-data/simple/"}'
+./batsim -p ../../simulator-prototype/platform-generator/qarnot-extractor/sample-data/simple/platform.xml \
+       -w ../../simulator-prototype/platform-generator/qarnot-extractor/sample-data/simple/workload_simple.json \
+       --events ../../simulator-prototype/platform-generator/qarnot-extractor/sample-data/simple/events_simple.json \
        -T 2 --enable-dynamic-jobs --forward-unknown-event
 
 pybatsim schedulers/greco/qarnotNodeSched.py -o '{"input_path":"../simulator-prototype/platform-generator/qarnot-extractor/sample-data/OLD/1day_2019-03-10_2019-03-11/"}'
@@ -61,8 +61,8 @@ python3 launcher.py schedulers/greco/transferHistoryStatic.py
     --events ../../transient/23-04_2w_static/events_transfers.txt \
     -T 2 --enable-dynamic-jobs --forward-unknown-event
 
-pybatsim schedulers/greco/transferHistoryStatic.py
-python3 launcher.py schedulers/greco/transferHistoryStatic.py
+pybatsim schedulers/greco/transferHistoryStatic.py -o '{"input_path":"../transient/04_10_2w_0920_0935_static"}'
+python3 launcher.py schedulers/greco/transferHistoryStatic.py -o '{"input_path":"../transient/04_10_2w_0920_0935_static"}'
 ./batsim -p ../../transient/04_10_2w_0920_0935_static/platform.xml \
     -w ../../transient/04_10_2w_0920_0935_static/workload.json \
     -T 2
