@@ -1,6 +1,10 @@
 
 ```bash
 echo "NIX Env loading"
+
+curl https://nixos.org/nix/install | sh
+nix-env -i ipfs
+
 source ~/.nix-profile/etc/profile.d/nix.sh
 . /home/abauskar/.nix-profile/etc/profile.d/nix.sh
 
@@ -85,7 +89,7 @@ oarsub -l host=1,walltime=3 -I -t deploy
 
 echo "kadeploy"
 kadeploy3 -f $OAR_NODE_FILE -e ubuntu1804-x64-min -k
-kadeploy3 -f $OAR_NODE_FILE -e debian9-x64-big -k
+kadeploy3 -f $OAR_NODE_FILE -e ipfs-ubuntu-min -k
 
 echo "List all images"
 kaenv3 -l
@@ -94,12 +98,21 @@ echo "Nix issue"
 sysctl kernel.unprivileged_userns_clone=1
 
 echo "Custom environment"
-ssh root@$OAR_NODE_FILE tgz-g5k > pybatsim_image.tgz
-kaenv3 -p ubuntu1804-x64-min -u deploy > pybatsim_image.env
-kaenv3 -p debian9-x64-big -u deploy > pybatsim_image.env
-kadeploy3 -f $OAR_NODE_FILE -a pybatsim_image.env -k
+ssh root@$OAR_NODE_FILE tgz-g5k > image.tgz
+kaenv3 -p debian9-x64-min -u deploy > image.env
+kaenv3 -a image.env
+kadeploy3 -f $OAR_NODE_FILE -a image.env -k
 
 echo "Add a User"
 adduser username
 usermod -aG sudo username
+```
+
+```bash
+# Steps for running IPFS
+ipfs init
+ipfs daemon
+
+kill -9 $(pidof ipfs)
+
 ```
