@@ -99,13 +99,24 @@ sysctl kernel.unprivileged_userns_clone=1
 
 echo "Custom environment"
 ssh root@$OAR_NODE_FILE tgz-g5k > image.tgz
-kaenv3 -p debian9-x64-min -u deploy > image.env
+kaenv3 -p ubuntu1804-x64-min -u deploy > image.env
 kaenv3 -a image.env
 kadeploy3 -f $OAR_NODE_FILE -a image.env -k
 
 echo "Add a User"
 adduser username
 usermod -aG sudo username
+
+curl  -kns https://api.grid5000.fr/4.0/sites/rennes/deployment -X POST -H'Content-Type: application/json' -d '{
+          "nodes": ["paravance-49.rennes.grid5000.fr",
+                    "paravance-30.rennes.grid5000.fr",
+                    "paravance-31.rennes.grid5000.fr"],
+          "environment": {
+             "kind" : "database",
+             "name": "ubuntu1804-x64-min"
+          },
+          "ssh_authorized_keys" :"~/.ssh/.id_rsa.pub"
+ }'
 ```
 
 ```bash
@@ -114,5 +125,28 @@ ipfs init
 ipfs daemon
 
 kill -9 $(pidof ipfs)
+```
 
+```bash
+# Vagrant
+vagrant init ubuntu/bionic64
+vagrant up
+vagrant ssh
+
+vagrant package --output ubuntu-ipfs.box
+vagrant box remove ubuntu-ipfs
+vagrant box add ubuntu-ipfs ubuntu-ipfs.box
+
+vagrant destory
+rm Vagrantfile
+```
+
+```bash
+#Other stuff
+
+#Python3
+sudo ln -sfn /usr/bin/python3.6 /usr/bin/python
+pip install virtualenv --user
+export PATH=~/.local/bin/:$PATH
+virtualenv venv
 ```
