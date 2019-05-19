@@ -87,6 +87,8 @@ echo "Create a subnet"
 oarsub -I -l slash_22=1+{"virtual!='NO'"}/nodes=1
 oarsub -l host=1,walltime=3 -I -t deploy
 
+oarwalltime %jobid +1:00
+
 echo "kadeploy"
 kadeploy3 -f $OAR_NODE_FILE -e ubuntu1804-x64-min -k
 kadeploy3 -f $OAR_NODE_FILE -e ipfs-ubuntu-min -k
@@ -113,7 +115,7 @@ curl  -kns https://api.grid5000.fr/4.0/sites/rennes/deployment -X POST -H'Conten
                     "paravance-31.rennes.grid5000.fr"],
           "environment": {
              "kind" : "database",
-             "name": "ubuntu1804-x64-min"
+             "name": "ubuntu-ipfs"
           },
           "ssh_authorized_keys" :"~/.ssh/.id_rsa.pub"
  }'
