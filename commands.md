@@ -152,3 +152,23 @@ pip install virtualenv --user
 export PATH=~/.local/bin/:$PATH
 virtualenv venv
 ```
+
+```bash
+# Show the config
+ipfs config show
+
+# Run the Garbage collector
+ipfs repo gc
+
+# Unpin a file
+ipfs pin rm $YOUR_HASH
+
+# Unpin everything from
+ipfs pin ls -q --type recursive | xargs ipfs pin rm
+
+# List every file
+ipfs pin ls -q --type recursive
+
+# test
+https://ipfs.io/ipfs/QmP8jTG1m9GSDJLCbeWhVSVgEzCPPwXRdCRuJtQ5Tz9Kc9
+```
