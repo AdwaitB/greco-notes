@@ -3,6 +3,8 @@
 echo "NIX Env loading"
 
 curl https://nixos.org/nix/install | sh
+source ~/.nix-profile/etc/profile.d/nix.sh
+
 nix-env -i ipfs
 
 source ~/.nix-profile/etc/profile.d/nix.sh
@@ -43,6 +45,7 @@ python3 launcher.py schedulers/greco/qarnotNodeSched.py -o '{"input_path":"../si
 
 pybatsim schedulers/greco/qarnotNodeSched.py -o '{"input_path":"../transient/04-03_18-03_2m", "update_period":600}'
 python3 launcher.py schedulers/greco/qarnotNodeSched.py -o '{"input_path":"../transient/04-03_18-03_2m", "update_period":600}'
+python3 launcher.py schedulers/greco/qarnotNodeSched.py -o '{"dataset_filename":"../transient/04-03_18-03_2m/datasets.json", "update_period":600}'
 ./batsim -p ../../transient/04-03_18-03_2m/platform.xml \
     -w ../../transient/04-03_18-03_2m/workload.json \
     --events ../../transient/04-03_18-03_2m/events.json \
@@ -73,6 +76,12 @@ python3 launcher.py schedulers/greco/transferHistoryStatic.py -o '{"input_path":
 ./batsim -p ../../transient/04_10_2w_0920_0935_static/platform.xml \
     -w ../../transient/04_10_2w_0920_0935_static/workload_empty.json \
     --events ../../transient/04_10_2w_0920_0935_static/events_transfers.txt \
+    -T 2 --enable-dynamic-jobs --forward-unknown-event
+
+python3 launcher.py schedulers/greco/qarnotNodeSched.py -o '{"input_path":"../simulator-prototype/sample-data/3d_09-05-2019"}'
+./batsim -p ../../simulator-prototype/sample-data/3d_09-05-2019/platform.xml \
+    -w ../../simulator-prototype/sample-data/3d_09-05-2019/workload.json \
+    --events ../../simulator-prototype/sample-data/3d_09-05-2019/events.json \
     -T 2 --enable-dynamic-jobs --forward-unknown-event
 ```
 ```python
